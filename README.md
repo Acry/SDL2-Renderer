@@ -11,6 +11,6 @@ Useful links:
 [SDL2](https://www.libsdl.org/)  [SDL-Discourse](https://discourse.libsdl.org)  [More Example Code](https://gist.github.com/Acry/baa861b8e370c6eddbb18519c487d9d8)
 
 Screenshots:  
-![Screenshot](./screenshot.jpg)
-![Screenshot2](./shot_2.jpg)
-[Get in touch on SDL-Discourse](https://discourse.libsdl.org/u/Acry/summary)
+![Screenshot](./screenshot.jpg)  
+![Screenshot2](./shot_2.jpg)  
+[Get in touch on SDL-Discourse](https://discourse.libsdl.org/u/Acry/summary)  
