@@ -5,8 +5,14 @@
  * SDL2 Renderer infrastructure.
  * Check comments in helper.c
  * 
- * Rendering a png flipped/mirrored to the screen
- * // https://wiki.libsdl.org/SDL_RenderCopyEx
+ * Rendering a png to the screen
+ * Save a Screenshot
+ */
+
+
+/* DEFINED PROGRESS GOALS
+ * 
+ * None atm
  * 
  */
 //END   DESCRIPTION
@@ -60,14 +66,21 @@ int main(int argc, char *argv[])
 
 //BEGIN INIT
 init();
+//Got the renderer now
+//Now I am going to create a texture from the surface I loaded
+//follow the function definition
 assets_in();
+
 
 //BEGIN WINDOW
 SDL_SetWindowPosition(Window,0,0);
 SDL_SetWindowSize(Window,ww,wh);
-SDL_SetWindowTitle(Window, "RenderCopyEx - Flip");
+SDL_SetWindowTitle(Window, "SDL2 Renderer");
 SDL_ShowWindow(Window);
 //END WINDOW
+
+Uint32 fmt=SDL_GetWindowPixelFormat(Window);
+temp_surface=SDL_CreateRGBSurfaceWithFormat(0, ww, wh, 32, fmt);
 
 SDL_Event event;
 int running = 1;
@@ -104,7 +117,10 @@ while(running){
 				case SDLK_r:
 				case SDLK_BACKSPACE:
 					break;
-
+				case SDLK_s:
+					SDL_RenderReadPixels(Renderer, NULL, fmt,temp_surface->pixels,temp_surface->pitch);
+					IMG_SaveJPG(temp_surface, "out.jpg", 255);
+					break;
 				case SDLK_p:	
 				case SDLK_SPACE:
 					break;
@@ -116,13 +132,15 @@ while(running){
 	}
 	//END   EVENT LOOP
 	//BEGIN RENDERING
+	//It's way quicker to blank the whole screen instead of rects
+	//remember - on the gpu now.
 	SDL_SetRenderDrawColor(Renderer, WHITE);
 	SDL_RenderClear(Renderer);
-
-	// Using Extended Rendercopy
-	// Renderer|Texture|SrcRect|DstRect|Rotation-angle & center
-	SDL_RenderCopyEx(Renderer, logo, NULL, &logo_dst, 0, NULL, SDL_FLIP_VERTICAL|SDL_FLIP_HORIZONTAL);
-	// SDL_FLIP_NONE | SDL_FLIP_HORIZONTAL | SDL_FLIP_VERTICAL
+	//passing some pointers, what and where to draw before 
+	//the scene is drawn.
+	//What is passed first will be on the bottom level
+	//like a stack
+	SDL_RenderCopy(Renderer, logo, NULL, &logo_dst);
 
 	SDL_RenderPresent(Renderer);
 	//END   RENDERING
@@ -139,20 +157,42 @@ return EXIT_SUCCESS;
 //BEGIN FUNCTIONS
 void assets_in(void)
 {
-
+	// The Texture in this case is declared in globally
+	// so it's available for other functions without passing it
+	// as argument.
+	
+	// SDL_Texture    *logo		= NULL;
+	// It is a typedef'ed struct declared in SDL_render.h
 	//BEGIN LOGO
 	temp_surface = IMG_Load("./assets/gfx/logo.png");
+	// That wasn't new - just loading the image format to a surface
+	
+	// Now I call CreateTextureFromSurface to convert the image
+	// to pass it to the GPU-Memory
+	
+	// https://wiki.libsdl.org/SDL_CreateTextureFromSurface
 	logo = SDL_CreateTextureFromSurface(Renderer, temp_surface);
+	
+	// Since one can't just simply query the the texture all the time
+	// like with surfaces (surface->w/w)
+	// I call
 	SDL_QueryTexture(logo, NULL, NULL, &logo_dst.w, &logo_dst.h);
+	// instead.
+	// https://wiki.libsdl.org/SDL_QueryTexture
+	// not passing format or access here. just interesting in the
+	// dimensions
+
 	logo_dst.x=(ww/2)-(logo_dst.w/2);
 	logo_dst.y=(wh/2)-(logo_dst.h/2);
 	//END 	LOGO
+	// Now the Texture is set and we are good to render is.
+	// check the main loop
 
 }
 
 void assets_out(void)
 {
-
+	//Need to deallocate what was allocated
 	SDL_FreeSurface(temp_surface);
 	SDL_DestroyTexture(logo);
 }

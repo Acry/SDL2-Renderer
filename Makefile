@@ -5,7 +5,7 @@ LDFLAGS  = `sdl2-config --libs` -lSDL2_image -lm
 .SUFFIXES: .c .o
 
 srcdir	 =src/
-TARGETS	 = 1 1a 1b 1c 2 3 4
+TARGETS	 = 1 1a 1b 1c 1d 2 3 4
 
 .PHONY: all
 all: $(TARGETS)
@@ -13,14 +13,21 @@ all: $(TARGETS)
 #render png
 1: $(srcdir)helper.c $(srcdir)1.c
 	$(CC) $(CFLAGS) -o $@ $+ $(LDFLAGS)
+
 #render png flipped/mirrored
 1a: $(srcdir)helper.c $(srcdir)1a.c
 	$(CC) $(CFLAGS) -o $@ $+ $(LDFLAGS)
+
 #render and rotate png
 1b: $(srcdir)helper.c $(srcdir)1b.c
 	$(CC) $(CFLAGS) -o $@ $+ $(LDFLAGS)
+
 #render and rotate png with center
 1c: $(srcdir)helper.c $(srcdir)1c.c
+	$(CC) $(CFLAGS) -o $@ $+ $(LDFLAGS)
+
+#render png and make screenshot with s
+1d: $(srcdir)helper.c $(srcdir)1d.c
 	$(CC) $(CFLAGS) -o $@ $+ $(LDFLAGS)
 
 2: $(srcdir)helper.c $(srcdir)2.c
@@ -34,5 +41,5 @@ all: $(TARGETS)
 
 .PHONY: clean
 clean:
-	@rm $(TARGETS) 2>/dev/null || true
+	@rm $(TARGETS) out.jpg 2>/dev/null || true
 
