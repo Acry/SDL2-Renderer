@@ -1,8 +1,8 @@
 This is a series about the SDL2-Renderer  
 
   1 - sets up a Renderer and renders a png  
-	1a, 1b, 1c using SDL_RenderCopyEx  
-	1d how to take a screenshot
+	   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1a, 1b, 1c using SDL_RenderCopyEx  
+	   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1d how to take a screenshot  
   2 - uses SDL_RenderDrawPoint to render a gradient.  
   3 - resizes the gradient to the window dimensions  
   4 - animates the gradient like a new shadertoy gradient.  
