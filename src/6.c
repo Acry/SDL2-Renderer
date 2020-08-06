@@ -4,8 +4,15 @@
 /* This is a series of examples about the
  * SDL2 Renderer infrastructure.
  * 
- * Rendering and rotating a png with different Center
- * //https://wiki.libsdl.org/SDL_RenderCopyEx
+ * use of SDL_RenderDrawPoint
+ * defined in SDL_render.h
+ * https://wiki.libsdl.org/SDL_RenderDrawPoint
+ * 
+ */
+
+/* DEFINED PROGRESS GOALS
+ * Want to make the same gradient like in Surfaces Series Nr.6
+ * In Demo 3 the Gradient will resize with the window dimensions.
  * 
  */
 //END   DESCRIPTION
@@ -18,11 +25,11 @@
 //END   INCLUDES
 
 //BEGIN CPP DEFINITIONS
-#define WHITE 255,255,255,255
-#define BLACK 0,0,0,255
-#define RED   255,0,0,255
-#define WW 550
-#define WH (WW/16)*9
+#define WHITE 	255,255,255,255
+#define BLACK 	0,0,0,255
+#define RED   	255,0,0,255
+#define WW 	255
+#define WH 	255
 //END   CPP DEFINITIONS
 
 //BEGIN DATASTRUCTURES
@@ -33,13 +40,7 @@ int ww=WW;
 int wh=WH;
 
 //BEGIN VISIBLES
-SDL_Surface    *temp_surface	= NULL;
-
-SDL_Texture    *logo		= NULL;
-SDL_Rect 	logo_dst;
 //END 	VISIBLES
-
-SDL_Point	mouse;
 
 //END   GLOBALS
 
@@ -59,19 +60,13 @@ int main(int argc, char *argv[])
 
 //BEGIN INIT
 init();
-assets_in();
-
 //BEGIN WINDOW
 SDL_SetWindowPosition(Window,0,0);
 SDL_SetWindowSize(Window,ww,wh);
-SDL_SetWindowTitle(Window, "RenderCopyEx - Rotate 2");
+SDL_SetWindowTitle(Window, "RenderDrawPoint");
 SDL_ShowWindow(Window);
 //END WINDOW
-// An angle in degrees that indicates the rotation that will be applied to
-// dstrect, rotating it in a clockwise direction.
-double a=0;
-// Rotation Center:
-SDL_Point c={logo_dst.x,logo_dst.y};
+
 SDL_Event event;
 int running = 1;
 //END   INIT
@@ -118,46 +113,34 @@ while(running){
 		}
 	}
 	//END   EVENT LOOP
-	a+=0.1;
 	//BEGIN RENDERING
 	SDL_SetRenderDrawColor(Renderer, WHITE);
 	SDL_RenderClear(Renderer);
-
-	// Using Extended Rendercopy
-	// Renderer|Texture|SrcRect|DstRect|Rotation-angle & center
-	SDL_RenderCopyEx(Renderer, logo, NULL, &logo_dst, a, &c, 0);
-
+// 	That was the algo from the surfaces example:
+// 	for (int i=0; i <screen->w; i++){
+// 		for (int j=0; j <screen->h; j++){
+// 			color=SDL_MapRGBA(screen->format, i, 255-j, 255-i, 255);
+// 			putpixel(screen,i,j,color);
+// 		}
+// 		
+// 	}
+// 	Adapt that:
+	int i;
+	for (i=0; i <ww; i++){
+		for (int j=0; j <wh; j++){
+			SDL_SetRenderDrawColor(Renderer, i, 255-j, 255-i, 255);
+			SDL_RenderDrawPoint(Renderer,i,j);
+		}
+	}
 	SDL_RenderPresent(Renderer);
 	//END   RENDERING
+	
 }
 //END   MAIN LOOP
-
-assets_out();
 exit_();
 return EXIT_SUCCESS;
-
 }
 //END   MAIN FUNCTION
 
 //BEGIN FUNCTIONS
-void assets_in(void)
-{
-
-	//BEGIN LOGO
-	temp_surface = IMG_Load("./assets/gfx/logo.png");
-	logo = SDL_CreateTextureFromSurface(Renderer, temp_surface);
-	SDL_QueryTexture(logo, NULL, NULL, &logo_dst.w, &logo_dst.h);
-	logo_dst.x=(ww/2)-(logo_dst.w/2);
-	logo_dst.y=(wh/2)-(logo_dst.h/2);
-	//END 	LOGO
-
-}
-
-void assets_out(void)
-{
-
-	SDL_FreeSurface(temp_surface);
-	SDL_DestroyTexture(logo);
-}
-
 //END   FUNCTIONS

@@ -5,10 +5,10 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
-SDL_Window   *Window;
-SDL_Renderer *Renderer;
+extern SDL_Window   *Window;
+extern SDL_Renderer *Renderer;
 
-void init (void);
+void init(void);
 void exit_(void);
 
 #endif

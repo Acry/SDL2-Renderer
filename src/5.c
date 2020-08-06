@@ -6,7 +6,7 @@
  * Check comments in helper.c
  * 
  * Rendering a png to the screen
- * Save a Screenshot
+ * Save a Screenshot as png
  */
 
 
@@ -29,7 +29,7 @@
 #define BLACK 0,0,0,255
 #define RED   255,0,0,255
 #define WW 550
-#define WH (WW/16)*12
+#define WH (WW/16)*9
 //END   CPP DEFINITIONS
 
 //BEGIN DATASTRUCTURES
@@ -75,7 +75,7 @@ assets_in();
 //BEGIN WINDOW
 SDL_SetWindowPosition(Window,0,0);
 SDL_SetWindowSize(Window,ww,wh);
-SDL_SetWindowTitle(Window, "SDL2 Renderer");
+SDL_SetWindowTitle(Window, "Press s for screenshot");
 SDL_ShowWindow(Window);
 //END WINDOW
 
@@ -119,7 +119,7 @@ while(running){
 					break;
 				case SDLK_s:
 					SDL_RenderReadPixels(Renderer, NULL, fmt,temp_surface->pixels,temp_surface->pitch);
-					IMG_SaveJPG(temp_surface, "out.jpg", 255);
+					IMG_SavePNG(temp_surface, "out.png");
 					break;
 				case SDLK_p:	
 				case SDLK_SPACE:

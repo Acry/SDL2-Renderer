@@ -28,7 +28,7 @@
 #define BLACK 0,0,0,255
 #define RED   255,0,0,255
 #define WW 550
-#define WH (WW/16)*12
+#define WH (WW/16)*9
 //END   CPP DEFINITIONS
 
 //BEGIN DATASTRUCTURES
@@ -73,7 +73,7 @@ assets_in();
 //BEGIN WINDOW
 SDL_SetWindowPosition(Window,0,0);
 SDL_SetWindowSize(Window,ww,wh);
-SDL_SetWindowTitle(Window, "SDL2 Renderer");
+SDL_SetWindowTitle(Window, "SDL2 - Render PNG");
 SDL_ShowWindow(Window);
 //END WINDOW
 
