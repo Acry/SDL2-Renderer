@@ -1,5 +1,6 @@
-//BEGIN HEAD
-//BEGIN DESCRIPTION
+#pragma GCC diagnostic ignored "-Wunknown-pragmas"
+#pragma region HEAD
+#pragma region DESCRIPTION
 
 /* This is a series of examples about the
  * SDL2 Renderer infrastructure.
@@ -12,69 +13,68 @@
 
 /* DEFINED PROGRESS GOALS
  * Want to make the same gradient like in Surfaces Series Nr.6
- * In Demo 3 the Gradient will resize with the window dimensions.
  * 
  */
-//END   DESCRIPTION
+#pragma endregion   DESCRIPTION
 
-//BEGIN INCLUDES
+#pragma region INCLUDES
 //system headers
 #include <math.h>
 //local headers
 #include "helper.h"
-//END   INCLUDES
+#pragma endregion   INCLUDES
 
-//BEGIN CPP DEFINITIONS
+#pragma region CPP DEFINITIONS
 #define WHITE 	255,255,255,255
 #define BLACK 	0,0,0,255
 #define RED   	255,0,0,255
 #define WW 	255
 #define WH 	255
-//END   CPP DEFINITIONS
+#pragma endregion   CPP DEFINITIONS
 
-//BEGIN DATASTRUCTURES
-//END	DATASTRUCTURES
+#pragma region DATASTRUCTURES
+#pragma endregion DATASTRUCTURES
 
-//BEGIN GLOBALS
+#pragma region GLOBALS
 int ww=WW;
 int wh=WH;
 
-//BEGIN VISIBLES
-//END 	VISIBLES
+#pragma region VISIBLES
+#pragma endregion 	VISIBLES
 
-//END   GLOBALS
+#pragma endregion   GLOBALS
 
-//BEGIN FUNCTION PROTOTYPES
+#pragma region FUNCTION PROTOTYPES
 void assets_in	(void);
 void assets_out	(void);
-//END	FUNCTION PROTOTYPES
+#pragma endregion FUNCTION PROTOTYPES
 
-//END 	HEAD
+#pragma endregion 	HEAD
 
-//BEGIN MAIN FUNCTION
+#pragma region MAIN FUNCTION
 int main(int argc, char *argv[])
 {
 
 (void)argc;
 (void)argv;
 
-//BEGIN INIT
+#pragma region INIT
 init();
-//BEGIN WINDOW
+#pragma region WINDOW
 SDL_SetWindowPosition(Window,0,0);
 SDL_SetWindowSize(Window,ww,wh);
 SDL_SetWindowTitle(Window, "RenderDrawPoint");
 SDL_ShowWindow(Window);
-//END WINDOW
+#pragma endregion WINDOW
 
 SDL_Event event;
 int running = 1;
-//END   INIT
+#pragma endregion   INIT
 
-//BEGIN MAIN LOOP
+#pragma region MAIN LOOP
 while(running){
 
-	//BEGIN EVENT LOOP
+	#pragma region EVENT LOOP
 	while(SDL_PollEvent(&event)){
 		if(event.type == SDL_QUIT){
 			running =0;
@@ -112,8 +112,8 @@ while(running){
 			}
 		}
 	}
-	//END   EVENT LOOP
-	//BEGIN RENDERING
+	#pragma endregion   EVENT LOOP
+	#pragma region RENDERING
 	SDL_SetRenderDrawColor(Renderer, WHITE);
 	SDL_RenderClear(Renderer);
 // 	That was the algo from the surfaces example:
@@ -133,14 +133,14 @@ while(running){
 		}
 	}
 	SDL_RenderPresent(Renderer);
-	//END   RENDERING
+	#pragma endregion   RENDERING
 	
 }
-//END   MAIN LOOP
+#pragma endregion   MAIN LOOP
 exit_();
 return EXIT_SUCCESS;
 }
-//END   MAIN FUNCTION
+#pragma endregion   MAIN FUNCTION
 
-//BEGIN FUNCTIONS
-//END   FUNCTIONS
+#pragma region FUNCTIONS
+#pragma endregion   FUNCTIONS

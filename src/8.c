@@ -1,5 +1,6 @@
-//BEGIN HEAD
-//BEGIN DESCRIPTION
+#pragma GCC diagnostic ignored "-Wunknown-pragmas"
+#pragma region HEAD
+#pragma region DESCRIPTION
 
 /* This is a series of examples about the
  * SDL2 Renderer infrastructure.
@@ -29,69 +30,67 @@
  */
 
 /* This is no optimized code for a good reason,
- * no matter how much I optimize in surface or render code
- * I got no chance to compete againt 5000 cores in parallel on a
+ * I got no chance to compete againt 5000+ cores in parallel on a
  * modern GPU. That will be the next demo in the SDL2-OpenGL series;
- * and the follow up vulkan which is the latest industry creation.
  * 
  */
-//END   DESCRIPTION
+#pragma endregion   DESCRIPTION
 
-//BEGIN INCLUDES
+#pragma region INCLUDES
 //system headers
 #include <math.h>
 //local headers
 #include "helper.h"
-//END   INCLUDES
+#pragma endregion   INCLUDES
 
-//BEGIN CPP DEFINITIONS
+#pragma region CPP DEFINITIONS
 #define WHITE 	255,255,255,255
 #define BLACK 	0,0,0,255
 #define RED   	255,0,0,255
 #define WW 	255
 #define WH 	255
-//END   CPP DEFINITIONS
+#pragma endregion   CPP DEFINITIONS
 
-//BEGIN DATASTRUCTURES
-//END	DATASTRUCTURES
+#pragma region DATASTRUCTURES
+#pragma endregion DATASTRUCTURES
 
-//BEGIN GLOBALS
+#pragma region GLOBALS
 int ww=WW;
 int wh=WH;
-//BEGIN VISIBLES
-//END 	VISIBLES
+#pragma region VISIBLES
+#pragma endregion 	VISIBLES
 
-//END   GLOBALS
+#pragma endregion   GLOBALS
 
-//BEGIN FUNCTION PROTOTYPES
+#pragma region FUNCTION PROTOTYPES
 float	 iTime		(void);
 void 	update_screen	(float t);
-//END	FUNCTION PROTOTYPES
+#pragma endregion FUNCTION PROTOTYPES
 
-//END 	HEAD
+#pragma endregion 	HEAD
 
-//BEGIN MAIN FUNCTION
+#pragma region MAIN FUNCTION
 int main(int argc, char *argv[])
 {
 
 (void)argc;
 (void)argv;
 
-//BEGIN INIT
+#pragma region INIT
 init();
-//BEGIN WINDOW
+#pragma region WINDOW
 SDL_SetWindowPosition(Window,0,0);
 SDL_SetWindowSize(Window,ww,wh);
 SDL_SetWindowTitle(Window, "SDL2 Renderer");
 SDL_ShowWindow(Window);
-//END WINDOW
+#pragma endregion WINDOW
 SDL_Event event;
 int running = 1;
-//END   INIT
+#pragma endregion   INIT
 
-//BEGIN MAIN LOOP
+#pragma region MAIN LOOP
 while(running){
-	//BEGIN EVENT LOOP
+	#pragma region EVENT LOOP
 	while(SDL_PollEvent(&event)){
 		if(event.type == SDL_QUIT){
 			running =0;
@@ -136,18 +135,18 @@ while(running){
 			}
 		}
 	}
-	//END   EVENT LOOP
+	#pragma endregion   EVENT LOOP
 	update_screen(iTime());
 
 }
-//END   MAIN LOOP
+#pragma endregion   MAIN LOOP
 exit_();
 return EXIT_SUCCESS;
 
 }
-//END   MAIN FUNCTION
+#pragma endregion   MAIN FUNCTION
 
-//BEGIN FUNCTIONS
+#pragma region FUNCTIONS
 void update_screen(float t)
 {
 	SDL_RenderClear(Renderer);
@@ -187,4 +186,4 @@ float iTime(void)
 	return   (float)accumulate / (float)frequency;
 
 }
-//END   FUNCTIONS
+#pragma endregion   FUNCTIONS
