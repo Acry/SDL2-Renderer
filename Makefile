@@ -5,7 +5,7 @@ LDFLAGS  = `sdl2-config --libs` -lSDL2_image -lm
 .SUFFIXES: .c .o
 
 srcdir	 =src/
-TARGETS	 = 1 1a 1b 2 3 4 5 6 6a 7 8
+TARGETS	 = 1 1a 1b 1c 2 3 4 5 6 6a 7 8
 
 .PHONY: all
 all: $(TARGETS)
@@ -20,6 +20,10 @@ all: $(TARGETS)
 
 # scale with pause
 1b: $(srcdir)helper_1.c $(srcdir)1b.c
+	$(CC) $(CFLAGS) -o $@ $+ $(LDFLAGS)
+
+# xpm with logical-render size
+1c: $(srcdir)helper_1.c $(srcdir)1c.c
 	$(CC) $(CFLAGS) -o $@ $+ $(LDFLAGS)
 
 # render a png flipped/mirrored
