@@ -1,5 +1,9 @@
 # The SDL2 Renderer
 
+0  Set up Renderer  
+
+0a Set up Renderer with helper
+
 1 Set up a renderer and render a png.
 ![](screenshots/1.png)
 

@@ -5,10 +5,18 @@ LDFLAGS  = `sdl2-config --libs` -lSDL2_image -lm
 .SUFFIXES: .c .o
 
 srcdir	 =src/
-TARGETS	 = 1 1a 1b 1c 2 3 4 5 6 6a 7 8
+TARGETS	 = 0 0a 1 1a 1b 1c 2 3 4 5 6 6a 7 8
 
 .PHONY: all
 all: $(TARGETS)
+
+# set up Renderer
+0: $(srcdir)0.c
+	$(CC) $(CFLAGS) -o $@ $+ $(LDFLAGS)
+
+# set up Renderer with helper
+0a: $(srcdir)helper.c $(srcdir)0a.c
+	$(CC) $(CFLAGS) -o $@ $+ $(LDFLAGS)
 
 # render a png
 1: $(srcdir)helper.c $(srcdir)1.c
